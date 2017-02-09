@@ -3,7 +3,6 @@ package ponk.game.app;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -12,7 +11,6 @@ import java.net.URL;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import ponk.game.pojo.PonkBall;
@@ -30,6 +28,7 @@ public class PlayGame extends JPanel {
     private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEITH = 400;
     private static final int NIVEL_VELOCIDAD_BALL = 4;
+    private static final String ICO_PATH = "resources/images/ico.png";
 
     public PlayGame() {
         setFocusable(true);
@@ -73,7 +72,7 @@ public class PlayGame extends JPanel {
         Dimension dime = new Dimension(FRAME_WIDTH, FRAME_HEITH);
         principalFrame.setLocation(screenDimensionWidth(FRAME_WIDTH), screenDimensionHeith(FRAME_HEITH));
         //--------
-        URL proof = ClassLoader.getSystemResource("resources/images/ico.png");
+        URL proof = ClassLoader.getSystemResource(ICO_PATH);
         ImageIcon im = new ImageIcon(proof);
         principalFrame.setIconImage(im.getImage());
         //----->
