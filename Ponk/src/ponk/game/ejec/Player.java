@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ponk.game.ejec;
+
+import com.sun.prism.impl.PrismSettings;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import sun.misc.IOUtils;
+
+/**
+ *
+ * @author pdgomezl
+ */
+public class Player {
+
+    private static final int MICRO_SEGUNDO_SEGUNDO = 1000000;
+    private static final String SOUNDS_PACK = "resources/sounds/";
+
+    public static void playSound(String nombre) throws InterruptedException {
+        try {
+            URL proof = ClassLoader.getSystemResource(SOUNDS_PACK + nombre + ".wav");
+            InputStream in = proof.openStream();
+            Clip clip = AudioSystem.getClip();
+            //clip.setFramePosition(0);
+            clip.open(AudioSystem.getAudioInputStream(in));
+            clip.start();
+            Thread.sleep((int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO);
+            /*System.out.println("segundos : " + tim((int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO));
+            int segu = (int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO;
+            do {
+                System.out.println(tim((segu--)));
+                Thread.sleep(1000);
+            } while (clip.isRunning());
+             */
+ /*clip.stop();
+            System.out.println(clip.isRunning());
+            System.out.println("segundos : " + (int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO);
+             */
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+}
