@@ -3,6 +3,7 @@ package ponk.game.pojo;
 import ponk.game.app.PlayGame;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import ponk.game.app.user.score.ScoreStatus;
 import ponk.game.ejec.Player;
 
 /**
@@ -12,6 +13,7 @@ import ponk.game.ejec.Player;
 public class PonkBall {
 
     private static final int DIAMETER = 25;
+    private static final long AUMENTO_PUNTAJE = 1;
     private int ejeX = 1;
     private int ejeY = 2;
     private int aumentoEjeX = 1;
@@ -39,12 +41,14 @@ public class PonkBall {
         }
         if (collision()) {
             Player.playSound("popup");
+            //----------->
+            ScoreStatus.setPlayerActualScore(AUMENTO_PUNTAJE);
             //Thread.sleep(15);
             aumentoEjeY = -1;
             ejeY = game.bar.getTopY() - DIAMETER;
         }
-        ejeX = ejeX + aumentoEjeX;
-        ejeY = ejeY + aumentoEjeY;
+        ejeX += aumentoEjeX;
+        ejeY += aumentoEjeY;
     }
 
     private boolean collision() {
