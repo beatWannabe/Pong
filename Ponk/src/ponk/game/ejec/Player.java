@@ -14,7 +14,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Player {
 
-    private static final int MICRO_SEGUNDO_SEGUNDO = 1000000;
+    //private static final int MICRO_SEGUNDO_SEGUNDO = 1000000;
     private static final String SOUNDS_PACK = "resources/sounds/";
     private static final String FORMAT = ".wav";
 
@@ -25,8 +25,11 @@ public class Player {
             Clip clip = AudioSystem.getClip();
             //clip.setFramePosition(0);
             clip.open(AudioSystem.getAudioInputStream(in));
+            if (!nombre.equals("popup")) {
+                clip.loop(clip.LOOP_CONTINUOUSLY);
+            }
             clip.start();
-            Thread.sleep((int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO);
+            // Thread.sleep((int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO);
             /*System.out.println("segundos : " + tim((int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO));
             int segu = (int) clip.getMicrosecondLength() / MICRO_SEGUNDO_SEGUNDO;
             do {

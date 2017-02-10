@@ -14,6 +14,7 @@ public class PonkBall {
 
     private static final int DIAMETER = 25;
     private static final long AUMENTO_PUNTAJE = 100;
+    private static int aumentoVelocidad = 1;
     private int ejeX = 1;
     private int ejeY = 2;
     private int aumentoEjeX = 1;
@@ -25,6 +26,23 @@ public class PonkBall {
     }
 
     public void move() throws InterruptedException {
+        int userHs = (int) ScoreStatus.getPlayerActualScore();
+        if (userHs >= 1500) {
+            aumentoVelocidad = 2;
+        } else if (userHs >= 3500) {
+            aumentoVelocidad = 3;
+        } else if (userHs >= 5500) {
+            aumentoVelocidad = 4;
+        }
+        switch ((int) ScoreStatus.getPlayerActualScore()) {
+            case 1500: {
+                aumentoVelocidad = 2;
+            }
+            case 3500: {
+            }
+            case 5500: {
+            }
+        }
         if (ejeX + aumentoEjeX < 0) {
             aumentoEjeX = 1;
         }
@@ -47,8 +65,8 @@ public class PonkBall {
             aumentoEjeY = -1;
             ejeY = game.bar.getTopY() - DIAMETER;
         }
-        ejeX += aumentoEjeX;
-        ejeY += aumentoEjeY;
+        ejeX += aumentoEjeX * aumentoVelocidad;
+        ejeY += aumentoEjeY * aumentoVelocidad;
     }
 
     private boolean collision() {
@@ -93,6 +111,10 @@ public class PonkBall {
 
     public void setAumentoEjeY(int aumentoEjeY) {
         this.aumentoEjeY = aumentoEjeY;
+    }
+
+    public static void setAumentoVelocidad(int aumentoVelocidad) {
+        PonkBall.aumentoVelocidad = aumentoVelocidad;
     }
 
 }
