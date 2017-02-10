@@ -11,10 +11,18 @@ import java.awt.event.KeyEvent;
  */
 public class PonkBar {
 
-    private static final int NIVEL_AVANCE_BALL = 2;
+    private static int nivelAvanceBar = 2;
     private static int ejeY;
     private static final int WITH = 60;
     private static final int HEIGHT = 10;
+
+    public static int getNivelAvanceBar() {
+        return nivelAvanceBar;
+    }
+
+    public static void setNivelAvanceBar(int aNivelAvanceBar) {
+        nivelAvanceBar = aNivelAvanceBar;
+    }
     private int ejeX = 205;
     private int aumentoEjeX;
     private final PlayGame game;
@@ -25,12 +33,12 @@ public class PonkBar {
 
     public void move() {
         if (ejeX + aumentoEjeX > 0 && ejeX + aumentoEjeX < game.getWidth() - WITH) {
-            ejeX = ejeX + aumentoEjeX * NIVEL_AVANCE_BALL;
+            ejeX = ejeX + aumentoEjeX * nivelAvanceBar;
         }
     }
 
     public void paint(Graphics2D g) {
-        ejeY = game.getHeight() - 60;
+        ejeY = game.getHeight() - 30;
         g.fillRect(ejeX, ejeY, WITH, HEIGHT);
     }
 
@@ -81,6 +89,10 @@ public class PonkBar {
 
     public void setAumentoEjeX(int aumentoEjeX) {
         this.aumentoEjeX = aumentoEjeX;
+    }
+
+    public static int getWith() {
+        return WITH;
     }
 
 }
