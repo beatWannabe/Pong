@@ -163,6 +163,7 @@ public class PlayGame extends JPanel {
         if (JOptionPane.showConfirmDialog(this, "Desea Continuar ?", "Game Over", 0) == 0) {
             ponkBall.setEjeX(0);
             ponkBall.setEjeY(0);
+            PonkBall.setAumentoVelocidad(1);
             ponkBall.move();
             ScoreStatus.setPlayerActualScore(0);
             //----->
@@ -206,4 +207,5 @@ public class PlayGame extends JPanel {
         }
         return withTemp;
     }*/
+
 }
