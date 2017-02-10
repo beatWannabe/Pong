@@ -34,15 +34,6 @@ public class PonkBall {
         } else if (userHs >= 5500) {
             aumentoVelocidad = 4;
         }
-        switch ((int) ScoreStatus.getPlayerActualScore()) {
-            case 1500: {
-                aumentoVelocidad = 2;
-            }
-            case 3500: {
-            }
-            case 5500: {
-            }
-        }
         if (ejeX + aumentoEjeX < 0) {
             aumentoEjeX = 1;
         }
