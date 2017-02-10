@@ -29,8 +29,10 @@ public class PonkBall {
         int userHs = (int) ScoreStatus.getPlayerActualScore();
         if (userHs >= 1500) {
             aumentoVelocidad = 2;
+            PonkBar.setNivelAvanceBar(3);
         } else if (userHs >= 3500) {
             aumentoVelocidad = 3;
+            PonkBar.setNivelAvanceBar(4);
         } else if (userHs >= 5500) {
             aumentoVelocidad = 4;
         }

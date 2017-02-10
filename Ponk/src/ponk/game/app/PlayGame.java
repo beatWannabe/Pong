@@ -160,14 +160,15 @@ public class PlayGame extends JPanel {
 
     public void gameOver() throws InterruptedException {
 
-        if (JOptionPane.showConfirmDialog(this, "Desea Continuar ?", "Game Over", 0) == 0) {
+        if (JOptionPane.showConfirmDialog(this, "Puntuacion " + ScoreStatus.getPlayerActualScore() + " \n Desea Continuar ?", "Game Over", 0) == 0) {
             ponkBall.setEjeX(0);
             ponkBall.setEjeY(0);
             PonkBall.setAumentoVelocidad(1);
-            ponkBall.move();
             ScoreStatus.setPlayerActualScore(0);
             //----->
+            PonkBar.setNivelAvanceBar(2);
             bar.setEjeX(screenDimension(super.getWidth(), PonkBar.getWith()));
+            ponkBall.move();
         } else {
             System.exit(ABORT);
         }
@@ -207,5 +208,4 @@ public class PlayGame extends JPanel {
         }
         return withTemp;
     }*/
-
 }
