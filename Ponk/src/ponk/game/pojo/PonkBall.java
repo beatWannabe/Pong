@@ -13,7 +13,7 @@ import ponk.game.ejec.Player;
 public class PonkBall {
 
     private static final int DIAMETER = 25;
-    private static final long AUMENTO_PUNTAJE = 1;
+    private static final long AUMENTO_PUNTAJE = 100;
     private int ejeX = 1;
     private int ejeY = 2;
     private int aumentoEjeX = 1;

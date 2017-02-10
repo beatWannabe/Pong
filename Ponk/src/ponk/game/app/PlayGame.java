@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import ponk.game.app.user.score.ScoreStatus;
+import ponk.game.ejec.Player;
 import ponk.game.pojo.PonkBall;
 import ponk.game.pojo.PonkBar;
 
@@ -42,8 +43,9 @@ public class PlayGame extends JPanel {
     private static ScoreStatus scoreStatus;
     //private static Graphics graphics;
 
-    public PlayGame() {
-        numeroImagen = randomImage();
+    public PlayGame() throws InterruptedException {
+        Player.playSound(String.valueOf(randomValueInt(5)));
+        numeroImagen = randomValueInt(3);
         setFocusable(true);
         addKeyListener(new KeyListener() {
             @Override
@@ -150,7 +152,7 @@ public class PlayGame extends JPanel {
             game.repaint();
             Thread.sleep(VELOCIDAD_TIMER_EFECT);
             //puntaje
-            scoreStatus.setText(String.valueOf(ScoreStatus.getPlayerActualScore()));
+            scoreStatus.setText("HI " + String.valueOf(ScoreStatus.getPlayerActualScore()));
             //scoreStatus.update(graphics);
         }
 
@@ -173,9 +175,9 @@ public class PlayGame extends JPanel {
         //System.exit(ABORT);
     }
 
-    public static int randomImage() {
+    public static int randomValueInt(int queto) {
         Random rnd = new Random();
-        int numeroImage = (int) (rnd.nextDouble() * 3 + 1);
+        int numeroImage = (int) (rnd.nextDouble() * queto + 1);
         return numeroImage;
     }
 
