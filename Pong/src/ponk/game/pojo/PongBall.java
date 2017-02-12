@@ -1,0 +1,115 @@
+package ponk.game.pojo;
+
+import ponk.game.app.PlayGame;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import ponk.game.app.user.score.ScoreStatus;
+import ponk.game.ejec.Player;
+
+/**
+ *
+ * @author pdgomezl
+ */
+public class PongBall {
+
+    private static final int DIAMETER = 25;
+    private static final long AUMENTO_PUNTAJE = 100;
+    private static int aumentoVelocidad = 1;
+    private int ejeX = 1;
+    private int ejeY = 2;
+    private int aumentoEjeX = 1;
+    private int aumentoEjeY = 1;
+    private final PlayGame game;
+    private Player player;
+
+    public PongBall(PlayGame game) {
+        this.game = game;
+    }
+
+    public void move() throws InterruptedException {
+        int userHs = (int) ScoreStatus.getPlayerActualScore();
+        if (userHs >= 1500) {
+            aumentoVelocidad = 2;
+            PongBar.setNivelAvanceBar(3);
+        } else if (userHs >= 3500) {
+            aumentoVelocidad = 3;
+            PongBar.setNivelAvanceBar(4);
+        } else if (userHs >= 5500) {
+            aumentoVelocidad = 4;
+        }
+        if (ejeX + aumentoEjeX < 0) {
+            aumentoEjeX = 1;
+        }
+        if (ejeX + aumentoEjeX > game.getWidth() - DIAMETER) {
+            aumentoEjeX = -1;
+        }
+        if (ejeY + aumentoEjeY < 0) {
+            aumentoEjeY = 1;
+        }
+        if (ejeY + aumentoEjeY > game.getHeight() - DIAMETER) {
+            /*ejeX = 0;
+            ejeY = 0;*/
+            game.gameOver();
+        }
+        if (collision()) {
+            player = new Player();
+            player.playSound("popup");
+            //----------->
+            ScoreStatus.setPlayerActualScore(AUMENTO_PUNTAJE);
+            //Thread.sleep(15);
+            aumentoEjeY = -1;
+            ejeY = game.bar.getTopY() - DIAMETER;
+        }
+        ejeX += aumentoEjeX * aumentoVelocidad;
+        ejeY += aumentoEjeY * aumentoVelocidad;
+    }
+
+    private boolean collision() {
+        return game.bar.getBounds().intersects(getBounds());
+    }
+
+    public void paint(Graphics2D g) {
+        g.fillOval(ejeX, ejeY, DIAMETER, DIAMETER);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(ejeX, ejeY, DIAMETER, DIAMETER);
+    }
+
+    public int getEjeX() {
+        return ejeX;
+    }
+
+    public void setEjeX(int ejeX) {
+        this.ejeX = ejeX;
+    }
+
+    public int getEjeY() {
+        return ejeY;
+    }
+
+    public void setEjeY(int ejeY) {
+        this.ejeY = ejeY;
+    }
+
+    public int getAumentoEjeX() {
+        return aumentoEjeX;
+    }
+
+    public void setAumentoEjeX(int aumentoEjeX) {
+        this.aumentoEjeX = aumentoEjeX;
+    }
+
+    public int getAumentoEjeY() {
+        return aumentoEjeY;
+    }
+
+    public void setAumentoEjeY(int aumentoEjeY) {
+        this.aumentoEjeY = aumentoEjeY;
+    }
+
+    public static void setAumentoVelocidad(int aumentoVelocidad) {
+        PongBall.aumentoVelocidad = aumentoVelocidad;
+    }
+
+}
